@@ -1,0 +1,28 @@
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
+ 
+You need to write a React application using any backend framework of your choice.
+ 
+The application needs to display a list of products to the user. The user has the ability to add these items to a virtual basket and have the front end update.
+ 
+The products will need to be retrieved from a web API call to a back end. A static list of products is fine. The products need be in AUD currency.
+ 
+Once the products are added to the basket the user will have access to a 'go to basket' button to perform a check out of the products.
+ 
+
+The checkout page will present the basket items to the user. The user can remove items from the basket here.
+ 
+The checkout page will call a backend to calculate the total shipping cost. $10 shipping cost for orders less of $50 dollars and less. $20 for orders more than $50.
+
+The page will need to contain a country selector. Based on the country selected you need calculate the basket total based on the country and display the prices of the total, basket items and product pages in the correct currency.
+
+Include 3 countries in the selector their own foreign currency conversion rate.
+ 
+The checkout page will have a place order button which will post all the products to a method and will return success to the page. Once that is complete the page will navigate to a 'thank you' page.
+ 
+The focus of the exercise is on the code only. The pages should be neat but the focus is not the design.
+
+You'll need to provide front-end and back-end unit testing.
+
+You can do the test in either Angular (any version) or React (preference for React but you have the option) for the front-end.
+
+Apply best practices in the C# and React/Angular files.
