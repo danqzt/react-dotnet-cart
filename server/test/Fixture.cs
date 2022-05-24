@@ -7,6 +7,7 @@ using Server.Services;
 using Server.Repositories;
 using System;
 using System.Linq;
+using Microsoft.Extensions.Logging;
 
 namespace Test;
 public class TestFixture
@@ -50,5 +51,6 @@ public class TestFixture
         CountryRepoMoc.Setup( c=> c.GetCountries()).Returns(countries);
     }
 
-    public CartService CartService => new (new CartRepository(CountryRepoMoc.Object));
+    public CartService CartService => new (new CartRepository(CountryRepoMoc.Object), 
+                                           new Mock<ILogger<CartService>>().Object);
 }

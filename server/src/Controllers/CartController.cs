@@ -24,6 +24,9 @@ public class CartController : ControllerBase
     public IActionResult Get()
     {
         var cart = cartService.GetbyId(CartId);
+        if(cart == null)
+          return NotFound();
+        
         return Ok(cart);
     }
     
@@ -31,7 +34,7 @@ public class CartController : ControllerBase
     public IActionResult Post(CartItem item)
     {
         if (!ModelState.IsValid)
-            return BadRequest();
+            return BadRequest("Invalid Model");
 
         var cart = cartService.Update(CartId, item);
         return Ok(cart);
@@ -42,7 +45,7 @@ public class CartController : ControllerBase
     {
         Console.WriteLine("Delete called");
         if (!ModelState.IsValid)
-            return BadRequest();
+            return BadRequest("Invalid Model");
         
         var cart = cartService.Delete(CartId, item);
         return Ok(cart);
@@ -52,7 +55,7 @@ public class CartController : ControllerBase
     public IActionResult Update(Country country)
     {
         if (!ModelState.IsValid)
-            return BadRequest();
+            return BadRequest("Invalid Model");
 
         var cart = cartService.SetCountry(CartId, country);
         return Ok(cart);

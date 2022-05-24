@@ -32,6 +32,8 @@ builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
