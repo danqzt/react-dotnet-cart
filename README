@@ -1,0 +1,13 @@
+to run the application.
+1. With Docker, run command: 
+   docker-compose up
+   browse to http://localhost:3000
+
+2. Without docker in vscode
+   Open terminal go to 
+     - server/src -> then run command: dotnet run
+     - ui -> then run : npm start
+
+3. Run unit test.
+   Open terminal go to:
+     - server/test -> then run command: dotnet test

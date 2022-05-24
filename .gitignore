@@ -2,3 +2,4 @@ ui/node_modules/*
 server/src/bin/*
 server/src/obj/*
 server/test/bin/*
+server/test/obj/*
