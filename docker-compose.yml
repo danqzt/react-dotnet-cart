@@ -2,18 +2,17 @@ version: '3'
 
 services:
   ui:
-    command: /bin/sh -c "npm install && npm start"
+    image: react-ui
+    build: 
+      context: .
+      dockerfile: ui/Dockerfile
     environment:
       NODE_ENV: development
-    image: node:lts-alpine
     ports:
       - "3000:3000"
-    volumes:
-      - ./ui:/opt/ui
-    working_dir: /opt/ui
-
+      
   server:
-    image: server
+    image: dotnet-server
     build: 
       context: .
       dockerfile: server/src/Dockerfile
