@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useLocation } from "react-router-dom";
 import { Button, Container, Input, Label, Row } from "reactstrap";
 import Cart from "../Models/Cart"
 import CartItem from "../Models/CartItem";
 import Country from "../Models/Country";
-import { deleteItemToCart } from "../Services/CartService";
+import { cartChangeCountry, deleteItemToCart } from "../Services/CartService";
 import { getCountries } from "../Services/ProductSvc";
 import CartItemComponent from "./CartItem";
 
@@ -19,7 +19,8 @@ const CartComponent = () => {
     const location = useLocation();
     const cart = location.state as CartData;
     const countries = useQuery<Country[]>('countries', getCountries);
-
+    
+    const [selectedCountry, setCountry] = useState<Country>();
     const [cartData, setCart] = useState<Cart>();
 
     const handleDeleteItem = async (item: CartItem) => {
@@ -27,7 +28,19 @@ const CartComponent = () => {
         const cart = await deleteItemToCart(item);
         setCart(cart!);
     }
-    useEffect(() => setCart(cart.data),[]);
+
+    const handleCountryChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        var selected = event.target.value;
+        var country = countries?.data?.find(e => e.currency == selected);
+        setCountry(country);
+        const cart = await cartChangeCountry(country!);
+        setCart(cart);
+        
+    }
+    useEffect(() => {
+        setCart(cart.data);
+        setCountry(cart.data.country);
+    },[]);
 
     return (
         <section className="pt-5 pb-5">
@@ -39,7 +52,9 @@ const CartComponent = () => {
                             <i className="text-info font-weight-bold">{cartData?.items.length}</i> items in your cart</div>
                         <div className="mb-3 float-center w-25">
                             <Label for="slCountry" className="">Country </Label>
-                            <Input id="slCountry" bssize="sm" type={"select"} className="form-control form-control-sm text-center">
+                            <Input id="slCountry" bssize="sm" type={"select"} className="form-control form-control-sm text-center"
+                                    value={selectedCountry?.currency} onChange={handleCountryChange}
+                           >
                                 {countries.data?.map(c => (
                                     <option key={c.name} value={c.currency}>{c.name}</option>
                                 ))}
